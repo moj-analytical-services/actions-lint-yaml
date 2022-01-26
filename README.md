@@ -15,6 +15,6 @@ jobs:
         with:
           python-version: 3.9
       - name: Python linting
-        uses: moj-analytical-services/actions-lint-yaml@v1
+        uses: moj-analytical-services/actions-lint-yaml@main
  ```
  
