@@ -14,7 +14,7 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.9
-      - name: Python linting
+      - name: YAML linting
         uses: moj-analytical-services/actions-lint-yaml@main
  ```
  
