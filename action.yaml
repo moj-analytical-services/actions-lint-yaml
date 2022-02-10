@@ -6,14 +6,21 @@ runs:
     - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v1
+    - name: Check for yamllint config
+      run: |
+        if [ -e ./.yamllint ]; then
+            echo "A .yamllint config file has been found in the root of this branch and will be used in this workflow."
+        else
+            echo "No .yamllint config file has been found in the root of this branch and so the standard Data Engineering config will used."
+            curl https://moj-analytical-services.github.io/.github/configs/data-engineering/yamllint > .yamllint
+        fi
+      shell: bash
     - name: Install yamllint
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 yamllint
+        pip install yamllint
       shell: bash
     - name: Lint YAML files with yamllint
       run: >
-        yamllint . -d "{extends: default, rules: {line-length:
-        {allow-non-breakable-words: true, allow-non-breakable-inline-mappings:
-        true}}}" --no-warnings
+        yamllint .
       shell: bash
